@@ -1,0 +1,40 @@
+name: Rule correction
+description: A number, citation, or exemption in an existing rule is wrong
+labels: ["correction"]
+body:
+  - type: input
+    id: rule-id
+    attributes:
+      label: Rule id
+      description: The id in backticks at the top of the rule, e.g. `touch-target`
+      placeholder: wcag-contrast
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong
+      description: Quote the line as it stands today.
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: The source that says otherwise
+      description: >
+        Primary source please: the spec clause, the study with its year and
+        sample, the HIG page. A blog post that paraphrases one is not enough on
+        its own, though it is a fine way to point at the original.
+    validations:
+      required: true
+  - type: dropdown
+    id: grade
+    attributes:
+      label: What grade should it carry?
+      options:
+        - "[spec], normative"
+        - "[measured], from a study"
+        - "[convention], industry practice with no primary source"
+        - "Not sure"
+    validations:
+      required: true

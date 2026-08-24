@@ -1,0 +1,11 @@
+{
+  "name": "board-ly",
+  "owner": { "name": "Board-ly", "url": "https://github.com/Board-ly" },
+  "plugins": [
+    {
+      "name": "ordinary-interfaces",
+      "source": "./",
+      "description": "180 evidence-graded UI rules with hard numbers, for building and auditing interfaces."
+    }
+  ]
+}

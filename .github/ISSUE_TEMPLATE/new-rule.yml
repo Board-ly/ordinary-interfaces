@@ -1,0 +1,38 @@
+name: New rule
+description: Propose a rule the set is missing
+labels: ["new rule"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        This set holds **checkable constraints**: values, thresholds, and their
+        exemptions. Aesthetic direction belongs elsewhere. If your rule cannot be
+        written as a number or a binary check, it probably belongs in a design
+        skill that owns taste.
+  - type: input
+    id: ruling
+    attributes:
+      label: The ruling, in one quotable line
+      placeholder: Body text clears 4.5:1 against what it actually renders on.
+    validations:
+      required: true
+  - type: textarea
+    id: numbers
+    attributes:
+      label: The numbers and their source
+    validations:
+      required: true
+  - type: textarea
+    id: exemptions
+    attributes:
+      label: Where it does not hold
+      description: >
+        Real exemptions, not hedging. A rule with no exemptions is usually a rule
+        that has not been used on a real screen yet.
+    validations:
+      required: true
+  - type: input
+    id: file
+    attributes:
+      label: Which reference file should it live in?
+      placeholder: references/color.md

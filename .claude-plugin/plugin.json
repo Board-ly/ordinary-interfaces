@@ -1,0 +1,8 @@
+{
+  "name": "ordinary-interfaces",
+  "description": "180 evidence-graded UI rules with hard numbers, for building and auditing interfaces.",
+  "version": "1.0.0",
+  "author": { "name": "Board-ly" },
+  "homepage": "https://github.com/Board-ly/ordinary-interfaces",
+  "license": "MIT"
+}

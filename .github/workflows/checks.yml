@@ -1,0 +1,46 @@
+name: Checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Scripts compile, generated files current, contrast values hold
+        run: python3 scripts/check.py
+
+      - name: Skill frontmatter is present and named
+        run: |
+          head -1 skills/ordinary-interfaces/SKILL.md | grep -qx -- '---'
+          grep -qx 'name: ordinary-interfaces' skills/ordinary-interfaces/SKILL.md
+
+      - name: Manifest version matches the changelog
+        run: |
+          manifest=$(python3 -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          grep -q "## \[$manifest\]" CHANGELOG.md \
+            || { echo "plugin.json is $manifest, CHANGELOG.md has no ## [$manifest] entry"; exit 1; }
+
+      - name: Every rule id in RULE_INDEX.md resolves to a rule
+        run: |
+          python3 - <<'PY'
+          import re, sys, pathlib
+          skill = pathlib.Path("skills/ordinary-interfaces")
+          defined = set()
+          for ref in (skill / "references").glob("*.md"):
+              defined |= set(re.findall(r"^## `([a-z0-9-]+)`", ref.read_text(), re.M))
+          indexed = set(re.findall(r"`([a-z0-9-]+)`", (skill / "RULE_INDEX.md").read_text()))
+          orphans = sorted(indexed - defined)
+          if orphans:
+              sys.exit(f"RULE_INDEX.md lists ids with no rule behind them: {orphans}")
+          print(f"{len(defined)} rules, all resolvable")
+          PY

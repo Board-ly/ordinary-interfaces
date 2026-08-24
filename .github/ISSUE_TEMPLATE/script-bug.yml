@@ -1,0 +1,34 @@
+name: Script bug
+description: contrast.py, project-system.py or a build script misbehaves
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: script
+    attributes:
+      label: Which script
+      options:
+        - contrast.py
+        - project-system.py
+        - build-index.py
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: The exact command
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: What it printed, and what you expected instead
+      render: text
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: python3 --version
+    validations:
+      required: true

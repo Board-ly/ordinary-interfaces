@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security report
+    url: https://github.com/Board-ly/ordinary-interfaces/blob/main/SECURITY.md
+    about: Anything exploitable goes by email, not in a public issue.

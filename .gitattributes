@@ -1,0 +1,7 @@
+# Linguist treats Markdown as prose and leaves it out of the language bar. This
+# repo is mostly rules, so the bar should say so.
+*.md linguist-detectable=true
+
+# Generated from the rule headings by scripts/build-index.py. Collapse it in
+# diffs so a rename does not bury the actual change.
+skills/ordinary-interfaces/RULE_INDEX.md linguist-generated=true
