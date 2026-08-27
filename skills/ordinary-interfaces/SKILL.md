@@ -84,6 +84,20 @@ Details in `references/accessibility.md`.
 6. **Motion.** Nothing flashes >3×/second; non-essential animation sits behind `prefers-reduced-motion`, which means *gentler*, not *absent*; **every animated state change also needs a static cue**. `wcag-motion`, `reduced-motion`, `motion-restraint`
 7. **Reflow.** Works at 320 CSS px (1280px at 400% zoom) without 2D scrolling, and at 200% text zoom. `wcag-layout`
 
+## Commands
+
+Six sub-skills run one part of this on demand, without pulling in the whole
+skill. Reach for one when the task is a single step rather than a whole review.
+
+| Command | Does |
+|---|---|
+| `/ordinary-interfaces:read-project` | Step 0 above, on its own |
+| `/ordinary-interfaces:accessibility` | The seven non-negotiables only, pass/fail/unverified |
+| `/ordinary-interfaces:review` | The full audit below, in the documented format |
+| `/ordinary-interfaces:new-screen` | The build workflow below |
+| `/ordinary-interfaces:contrast` | A colour pair through `contrast.py`, with `--fix` |
+| `/ordinary-interfaces:find-rule` | One rule by id: value, grade, and where it stops applying |
+
 ## Routing
 
 Load only what the task touches.

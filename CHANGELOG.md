@@ -9,6 +9,22 @@ set:
 - **minor**: rules or reference files added, scripts gain capabilities
 - **patch**: a number corrected, a citation fixed, wording clarified
 
+## [1.1.0] / 2026-08-28
+
+### Fixed
+
+- **`SKILL.md` could not be installed.** The `description` value contained
+  `": "`, which YAML reads as a nested mapping, so `npx skills add` skipped the
+  file and reported "No valid skills found". The value is now quoted. Every
+  install route that parses the frontmatter was affected.
+
+### Added
+
+- **Six sub-skills**, each running one part of the skill on demand:
+  `/ordinary-interfaces:read-project`, `:accessibility`, `:review`,
+  `:new-screen`, `:contrast` and `:find-rule`. They carry `disable-model-invocation`, so they stay out of the way
+  until invoked; the main skill still loads itself when a task calls for it.
+
 ## [1.0.0] / 2026-08-24
 
 First public release.
@@ -34,4 +50,5 @@ First public release.
   it cannot drift from the rules.
 - Claude Code **plugin and marketplace manifests**.
 
+[1.1.0]: https://github.com/Board-ly/ordinary-interfaces/releases/tag/v1.1.0
 [1.0.0]: https://github.com/Board-ly/ordinary-interfaces/releases/tag/v1.0.0

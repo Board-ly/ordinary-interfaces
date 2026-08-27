@@ -21,6 +21,34 @@ Works in Claude Code, Codex, Opencode and other agents. As a Claude Code plugin:
 Or by hand. Copy `skills/ordinary-interfaces/` into `.claude/skills/` for one
 project, `~/.claude/skills/` for every project.
 
+## Commands
+
+The skill loads itself when a task calls for it. These six run a specific part of
+it on demand, so you can reach for one step without pulling in the whole thing.
+
+| Command | Does | Takes |
+|---|---|---|
+| `/ordinary-interfaces:read-project` | Reads what your codebase already decided about tokens, scales, colour notation and motion, so a review adopts your system instead of overwriting it | `[path]` |
+| `/ordinary-interfaces:accessibility` | The seven floors only: contrast, colour, hit areas, alt text, focus, motion, reflow. Pass, fail or unverified, and one verdict | `[file or path]` |
+| `/ordinary-interfaces:review` | Full review, ordered critical to low, every finding with a rule id, a measured value and the fix | `[file, component, screenshot]` |
+| `/ordinary-interfaces:new-screen` | The workflow for building: adopt the system, let the floors constrain the space, greyscale first, hardest state first | `[what you are building]` |
+| `/ordinary-interfaces:contrast` | Measures a colour pair against WCAG; `--fix` returns the nearest passing foreground | `<fg> <bg> [--fix]` |
+| `/ordinary-interfaces:find-rule` | One rule by id or topic: the value, its evidence grade, and where it stops applying | `[rule-id or topic]` |
+
+Outside Claude Code the bare names work too, `/review` and `/contrast`,
+unless something else already owns them.
+
+Each is its own skill under `skills/`, so `npx skills add` can install one on its
+own:
+
+```bash
+npx skills add Board-ly/ordinary-interfaces --skill accessibility
+```
+
+None of them auto-load. They carry `disable-model-invocation: true` so they stay
+out of the way until you type them; the main skill is the one that loads itself
+when a task calls for it.
+
 ## Why use it?
 
 Ask an agent for a card and it will guess. Probably `1.4` line-height, probably
