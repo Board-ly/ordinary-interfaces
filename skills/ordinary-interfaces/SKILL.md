@@ -5,7 +5,7 @@ description: 'Evidence-graded UI constraints with concrete numbers: contrast, ty
 
 # Ordinary Interfaces
 
-180 UI rules with hard numbers, graded by how well each is actually evidenced.
+211 UI rules with hard numbers, graded by how well each is actually evidenced.
 
 The point is not to have opinions about design. It is to replace "this feels a
 bit tight" with "container padding must exceed the sibling gap, heuristic 1.5×,
@@ -108,16 +108,19 @@ Load only what the task touches.
 | Type scale, line height, measure, wrapping, web font details | `references/typography.md` |
 | Padding, gaps, grids, breakpoints, RTL, translation growth | `references/spacing-layout.md` |
 | Buttons, links, inputs, forms, nav, component states | `references/interaction.md` |
+| Tooltips, popovers, menus, dialogs, sheets, toasts, backdrops | `references/overlays.md` |
 | Radius, shadows, image outlines, press feedback, theme switch | `references/surfaces.md` |
 | Elevation, borders, depth strategy, tokens, defaults | `references/interface-craft.md` |
 | Shadows, elevation scale, icon sizing, stroke, optical alignment | `references/depth-and-icons.md` |
 | Animation, easing, duration, transitions, gestures | `references/motion.md` |
 | Empty, loading, error, partial, overflow, offline states | `references/states.md` |
+| Tables, row density, sticky chrome, cell truncation, status columns | `references/data-display.md` |
 | Focus, keyboard, ARIA, live regions, hit areas, implementation | `references/a11y-implementation.md` |
 | WCAG success criteria, audit order, code-level checks | `references/accessibility.md` |
 | Button labels, errors, empty-state copy, capitalization | `references/writing.md` |
 | Hierarchy, emphasis, focal points, charts, radius tone | `references/composition.md` |
 | Choice counts, memory load, attention, optical centre | `references/ux-laws.md` |
+| Whether a UI reads as agent-built, with greppable cues | `references/ai-tells.md` |
 | Print, packaging, logo, photography (**outside the UI focus**) | `references/beyond-screen.md` |
 | Finding a rule by name | `RULE_INDEX.md` |
 
@@ -185,7 +188,11 @@ rather than *what the value is*.
 | `design-engineering` | Intent-first questioning, domain exploration, the signature test, pre-build checkpoint, Rams review format |
 | `sad-paths` | The state-audit workflow, its critical gate, hostile fixtures, agentic surfaces, and `scripts/scan.py`. **Run that scanner rather than grepping for missing states by hand** |
 | `frontend-design` | Aesthetic direction for a brief, taking a justified risk |
-| `dataviz` | Chart palettes, encodings, dashboards. The one chart rule here (`pie-chart-problem`) is only the perceptual-accuracy ranking |
+| `dataviz` | Chart palettes, encodings, dashboards. The one chart rule here (`pie-chart-problem`) is only the perceptual-accuracy ranking. `data-display.md` holds tables, which are UI rather than charts |
+| `mobile-native` | Platform behaviour on a phone: safe areas, tap highlight, viewport units, touch-action, keeping the keyboard open. **This skill deliberately holds none of it.** `dialog-to-sheet` and `sheet-drag-contract` are the overlap, and they stop at the overlay |
+| `animate` | Motion craft, interruptibility, how to build a specific transition. `motion.md` holds the durations and the easing bands only |
+| `scroll-animations` | Scroll-linked and scroll-triggered motion, `animation-timeline`, thresholds. This skill holds one position on it, in `ai-tells.md → load-animation-on-everything`: content above the fold does not animate in |
+| `stageshow` | Faux UI for marketing stills, demos and bento grids. Nothing here applies to an interface that is a picture of an interface |
 
 Two things to keep straight:
 

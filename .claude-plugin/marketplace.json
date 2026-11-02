@@ -5,7 +5,7 @@
     {
       "name": "ordinary-interfaces",
       "source": "./",
-      "description": "180 evidence-graded UI rules with hard numbers, for building and auditing interfaces."
+      "description": "211 evidence-graded UI rules with hard numbers, for building and auditing interfaces."
     }
   ]
 }

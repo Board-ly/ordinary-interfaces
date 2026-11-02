@@ -1,6 +1,6 @@
 # Ordinary Interfaces
 
-180 UI rules with hard numbers, each graded by how well it is actually evidenced.
+211 UI rules with hard numbers, each graded by how well it is actually evidenced.
 An agent skill for the thousand small decisions underneath a screen: contrast,
 type, spacing, hit areas, component states, motion, surfaces, icons, empty and
 error states, and the words in the interface.
@@ -79,6 +79,9 @@ underneath it is right.
 - **[color](skills/ordinary-interfaces/references/color.md)**: 21 rules. Ramps, tokens, dark mode, and the two contrast gates.
 - **[typography](skills/ordinary-interfaces/references/typography.md)**: 23 rules. Measure, leading, hierarchy, web font details.
 - **[motion](skills/ordinary-interfaces/references/motion.md)**: 22 rules. Duration, easing, transitions, gestures.
+- **[overlays](skills/ordinary-interfaces/references/overlays.md)**: 12 rules. Which element the job calls for, backdrops, sheet drag, dismissal, stacking.
+- **[ai-tells](skills/ordinary-interfaces/references/ai-tells.md)**: 10 rules. What marks a UI as agent-built, each with a cue you can grep for.
+- **[data-display](skills/ordinary-interfaces/references/data-display.md)**: 9 rules. Table chrome, alignment, density, sticky columns, truncation.
 - **[ux-laws](skills/ordinary-interfaces/references/ux-laws.md)**: 20 rules. The most quoted and worst quoted findings in design.
 - **[spacing-layout](skills/ordinary-interfaces/references/spacing-layout.md)**: 17 rules. Padding, gaps, grids, breakpoints, RTL, translation growth.
 - **[depth-and-icons](skills/ordinary-interfaces/references/depth-and-icons.md)**: 10 rules. Elevation scale, icon sizing, stroke, optical alignment.

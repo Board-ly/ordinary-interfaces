@@ -110,6 +110,12 @@ the corner radius instead of squaring it off.
 **Always 0.96.** Below 0.95 the press reads as exaggerated. Provide a `static`
 prop or class to switch it off where motion would distract.
 
+**On a device with no hover, the press is the only feedback there is.** Hover
+steps sit behind `@media (hover: hover)`, per `motion.md → hover-gating`, so a
+control styled only on `:hover` gives a touch user nothing at all, see
+`ai-tells.md → hover-without-press`. The press scale is not the decoration on
+top of the hover state; it is the state that always runs.
+
 **On the two numbers in this skill:** `motion.md → never-scale-zero` gives
 0.95–0.98 from a different source. **0.96 sits inside that band.** Use it as the
 default and treat the band as tolerance when matching an existing product's

@@ -21,7 +21,7 @@ good reasoning, not perceptual facts.
 ## Adding or changing a rule
 
 1. **Find the right file.** Rules live in
-   `skills/ordinary-interfaces/references/`, 14 topic files. If your rule needs
+   `skills/ordinary-interfaces/references/`, 18 topic files. If your rule needs
    a fifteenth, open an issue first; a new area changes the routing table in
    `SKILL.md`.
 

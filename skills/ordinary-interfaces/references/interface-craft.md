@@ -49,6 +49,12 @@ should jump out. (The same squint test verifies grouping, `proximity`.)
 Avoid harsh borders and thick decorative ones. Where a border exists only for
 depth, `surfaces.md → shadow-as-border` replaces it.
 
+**A sub-pixel hairline is a device question, not a style one.** At
+`devicePixelRatio: 1` a `0.5px` border rounds up to `1px` or disappears
+depending on the engine, so it is specified as `1px` at low opacity and dropped
+to `0.5px` only behind `@media (min-resolution: 2dppx)`. The worked example is
+in `data-display.md → table-chrome`, where hairlines carry the most weight.
+
 ---
 
 ## `depth-strategy`: Pick One · high
@@ -143,6 +149,7 @@ defaults rather than choices:
 1. **Warm cream background** near `#F4F1EA`, high-contrast serif display, terracotta accent near `#D97757`, the last being Anthropic's own interaction accent, so on a user's brief it reads as a tell.
 2. **Near-black background** with a single bright acid-green or vermilion accent.
 3. **Broadsheet layout.** Hairline rules, zero radius, dense newspaper columns.
+4. **Violet-to-blue gradient with glass.** A gradient from roughly `#6366F1` to `#A855F7`, translucent blurred cards, a radial glow behind a centred hero. The most generated-looking of the four, because the gradient, the glass and the glow arrive together as one preset.
 
 **Where a brief specifies a direction, follow it exactly, the brief's own words
 always win, including when it asks for one of these.** Where the brief leaves an

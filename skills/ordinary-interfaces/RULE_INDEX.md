@@ -1,6 +1,6 @@
 # Rule Index
 
-All 180 rules by id. `!` marks a critical rule (an accessibility gate).
+All 211 rules by id. `!` marks a critical rule (an accessibility gate).
 
 Generated from the reference files' own headings, so it cannot drift from them.
 Regenerate with `scripts/build-index.py`.
@@ -94,6 +94,23 @@ Regenerate with `scripts/build-index.py`.
 | `wcag-images` ! | Equivalent Purpose, Not Description | critical |
 | `wcag-motion` ! | Flashing and Vestibular Safety | critical |
 
+## Overlays & Dialogs: `references/overlays.md`
+
+| Id | Rule | Pri |
+|---|---|---|
+| `overlay-taxonomy` | Four Elements, Four Jobs | high |
+| `backdrop-spec` | Dim Enough to Mean It | medium |
+| `dialog-to-sheet` | Below 600px a Dialog Is a Sheet | medium |
+| `sheet-drag-contract` | The Sheet Follows the Finger | high |
+| `grab-handle` | An Affordance With a Hit Area | medium |
+| `scroll-lock` | Lock Without the Shift | high |
+| `anchor-collision` | Flip, Then Shift, Then Clamp | medium |
+| `focus-not-obscured` | Nothing Covers What the Keyboard Reached | high |
+| `dismiss-contract` | Esc Always, Backdrop Sometimes | high |
+| `overlay-stacking` | Three Tiers, Depth Two | medium |
+| `overlay-surface` | An Overlay Declares Its Level | medium |
+| `toast-budget` | Three Visible, Then Queue | medium |
+
 ## Surfaces: `references/surfaces.md`
 
 | Id | Rule | Pri |
@@ -174,6 +191,20 @@ Regenerate with `scripts/build-index.py`.
 | `permission-states` | 403 and 404 Are a Design Decision | medium |
 | `end-of-list` | Terminus, Settled, and Continuity | medium |
 
+## Tables & Dense Data: `references/data-display.md`
+
+| Id | Rule | Pri |
+|---|---|---|
+| `table-chrome` | Hairlines and a Frame, Not a Grid | medium |
+| `column-alignment` | Numbers Right, Text Left, Nothing Centred | high |
+| `row-density` | Three Densities, One Per Table | medium |
+| `sticky-chrome` | The Header Sticks, Identity Sticks on Narrow | medium |
+| `cell-truncation` | One Column May Truncate | medium |
+| `status-encoding` | A Dot and a Word | high |
+| `selection-without-shift` | Reserve the Column | medium |
+| `sort-affordance` | One Sorted Column, Announced | medium |
+| `table-empty-and-loading` | Keep the Columns | medium |
+
 ## Accessibility in Practice: `references/a11y-implementation.md`
 
 | Id | Rule | Pri |
@@ -240,6 +271,21 @@ Regenerate with `scripts/build-index.py`.
 | `muller-lyer-illusion` | Cap Direction Biases Perceived Length | low |
 | `irradiation-illusion` | Light on Dark Reads Larger | low |
 | `bouba-kiki-effect` | Curvature Carries Tone | low |
+
+## Agent Tells: `references/ai-tells.md`
+
+| Id | Rule | Pri |
+|---|---|---|
+| `one-spacing-value` | Rhythm, Not a Constant | high |
+| `one-shadow-everywhere` | Elevation Has to Mean Something | medium |
+| `border-instead-of-surface` | Everything Outlined | medium |
+| `hover-without-press` | No State for the Finger | high |
+| `centred-everything` | Centring as the Default Axis | medium |
+| `three-equal-cards` | The Feature Grid Reflex | medium |
+| `load-animation-on-everything` | Entrances Nobody Asked For | high |
+| `mixed-icon-sets` | Two Libraries and an Emoji | medium |
+| `form-tells` | The Label Is Not Optional | high |
+| `happy-path-only` | One State Shipped | high |
 
 ## Beyond the Screen (appendix): `references/beyond-screen.md`
 

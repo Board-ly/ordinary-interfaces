@@ -11,12 +11,14 @@ import sys
 ORDER = [
     ("color.md", "Color"), ("typography.md", "Typography"),
     ("spacing-layout.md", "Spacing & Layout"),
-    ("interaction.md", "Controls, Forms & Navigation"), ("surfaces.md", "Surfaces"),
+    ("interaction.md", "Controls, Forms & Navigation"),
+    ("overlays.md", "Overlays & Dialogs"), ("surfaces.md", "Surfaces"),
     ("interface-craft.md", "System Craft"), ("depth-and-icons.md", "Depth & Icons"),
     ("motion.md", "Motion"), ("states.md", "Non-Happy States"),
+    ("data-display.md", "Tables & Dense Data"),
     ("a11y-implementation.md", "Accessibility in Practice"),
     ("writing.md", "Interface Copy"), ("composition.md", "Hierarchy & Emphasis"),
-    ("ux-laws.md", "Cognition & Behaviour"),
+    ("ux-laws.md", "Cognition & Behaviour"), ("ai-tells.md", "Agent Tells"),
     ("beyond-screen.md", "Beyond the Screen (appendix)"),
 ]
 HEADING = re.compile(

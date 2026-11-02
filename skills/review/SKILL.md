@@ -19,9 +19,15 @@ Target: `$ARGUMENTS`. If empty, ask what to review rather than guessing.
    sentence.
 2. **Check the seven gates.** They constrain everything else. See
    `/ordinary-interfaces:accessibility`.
-3. **Load only the reference files the target touches.** The routing table in the
+3. **Run the cues in `references/ai-tells.md`** where the target is a codebase
+   rather than a screenshot. They are counting tests over the styles, so they
+   produce findings before anything has been read: one spacing value covering
+   most declarations, `:hover` without `:active`, one shadow across every
+   surface level, `return null` standing in for three states. Each cue names
+   the rule that fixes it.
+4. **Load only the reference files the target touches.** The routing table in the
    ordinary-interfaces skill maps surface to file.
-4. **Measure rather than estimate.** Contrast goes through `contrast.py`. A value
+5. **Measure rather than estimate.** Contrast goes through `contrast.py`. A value
    you did not measure is an inferred finding and must be labelled as one.
 
 ## Output

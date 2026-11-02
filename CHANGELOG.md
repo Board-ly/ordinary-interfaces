@@ -9,6 +9,41 @@ set:
 - **minor**: rules or reference files added, scripts gain capabilities
 - **patch**: a number corrected, a citation fixed, wording clarified
 
+## [1.2.0] / 2026-11-02
+
+### Added
+
+- **`references/overlays.md`, 12 rules.** The overlay layer had no coverage at
+  all. Which of the four elements a job calls for and what that commits you to,
+  backdrop values per mode, the 600px point where a dialog becomes a sheet, the
+  sheet drag contract including the inner-scroll conflict that loses typed
+  input, grab handles, scroll lock without the scrollbar shift, flip-shift-clamp
+  for anchored overlays, SC 2.4.11 focus obscuring, the dismissal contract per
+  overlay type, three stacking tiers with a depth limit of two, overlay
+  elevation, and a toast budget.
+- **`references/data-display.md`, 9 rules.** Tables were absent. Chrome,
+  alignment, three row densities, sticky header and identity column, which
+  column may truncate and why `title` is not a fallback, status as shape plus
+  word, selection without layout shift, `aria-sort`, and keeping the columns
+  while loading or empty.
+- **`references/ai-tells.md`, 10 rules.** The mechanical markers of agent-built
+  UI, as a detection layer: one spacing value, one shadow, borders instead of
+  surfaces, hover without press, centring as the default axis, the feature-grid
+  reflex, load animations, mixed icon sets, three form tells, and happy-path
+  only. Each carries a greppable cue and a threshold, and points at the rule
+  that fixes it. `interface-craft.md → default-tells` keeps the aesthetic
+  defaults.
+
+### Changed
+
+- Boundaries table names `mobile-native`, `animate` and `stageshow`, so the
+  skill stops where each of those starts. Phone platform behaviour is
+  deliberately absent: `mobile-native` owns it.
+- `border-discipline` carries the sub-pixel hairline question, which is a device
+  question rather than a style one.
+- `press-scale` states what the press does on a device with no hover.
+- `default-tells` gains the fourth aesthetic default.
+
 ## [1.1.0] / 2026-08-28
 
 ### Fixed

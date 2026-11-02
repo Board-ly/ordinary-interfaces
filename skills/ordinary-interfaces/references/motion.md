@@ -70,6 +70,15 @@ first frames.
 --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);  /* iOS-like */
 ```
 
+**Ease-out is a family, and the choice inside it is how hard it decelerates.**
+From gentlest to hardest: `0.25, 0.46, 0.45, 0.94` (quadratic),
+`0.23, 1, 0.32, 1` (the default above), `0.19, 1, 0.22, 1` (exponential). The
+harder the curve, the more the element reads as having arrived instantly and
+then settled, which is why the hard end suits things that appear (a menu) and
+the gentle end suits things that move (a value changing). Picking one per
+project and using it everywhere is worth more than picking the best one per
+component.
+
 ---
 
 ## `enter-exit-asymmetry`: Slow to Decide, Fast to Respond · high
