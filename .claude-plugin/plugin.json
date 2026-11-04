@@ -1,7 +1,7 @@
 {
   "name": "ordinary-interfaces",
-  "description": "211 evidence-graded UI rules with hard numbers, for building and auditing interfaces.",
-  "version": "1.2.0",
+  "description": "202 evidence-graded UI rules with hard numbers, for building and auditing interfaces.",
+  "version": "2.0.0",
   "author": {
     "name": "Board-ly"
   },

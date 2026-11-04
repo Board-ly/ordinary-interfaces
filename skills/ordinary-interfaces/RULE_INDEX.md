@@ -1,6 +1,6 @@
 # Rule Index
 
-All 211 rules by id. `!` marks a critical rule (an accessibility gate).
+All 202 rules by id. `!` marks a critical rule (an accessibility gate).
 
 Generated from the reference files' own headings, so it cannot drift from them.
 Regenerate with `scripts/build-index.py`.
@@ -286,17 +286,3 @@ Regenerate with `scripts/build-index.py`.
 | `mixed-icon-sets` | Two Libraries and an Emoji | medium |
 | `form-tells` | The Label Is Not Optional | high |
 | `happy-path-only` | One State Shipped | high |
-
-## Beyond the Screen (appendix): `references/beyond-screen.md`
-
-| Id | Rule | Pri |
-|---|---|---|
-| `viewing-distance` | Distance Sets Everything Else | high |
-| `visual-angle-arcminutes` | The Eye Measures Angle | high |
-| `aspect-ratios` | Ratio Belongs to Context | medium |
-| `logo-clearspace` | A Protected Zone, Defined as a Ratio | medium |
-| `logo-variations` | Six Types, Three Lockups | medium |
-| `joint-cropping` | Do Not Cut at a Joint | low |
-| `dieline-bleed` | Errors Become Physical | high |
-| `cmyk-vs-pantone` | Spec Both, Always | high |
-| `iso-216` | The Only Self-Similar Ratio | medium |

@@ -5,26 +5,19 @@ description: 'Evidence-graded UI constraints with concrete numbers: contrast, ty
 
 # Ordinary Interfaces
 
-211 UI rules with hard numbers, graded by how well each is actually evidenced.
+202 UI rules with hard numbers, graded by how well each is actually evidenced.
 
 The point is not to have opinions about design. It is to replace "this feels a
 bit tight" with "container padding must exceed the sibling gap, heuristic 1.5×,
 so a 16px gutter needs ≥24px padding (`padding-gap-ratio`)."
 
-**Ordinary is the goal, and it is not the same as generic.** An ordinary
-interface is unremarkable *in use*. It behaves the way people already expect
-(`jakobs-law`), it matches the system the project already has
-(`match-the-project`), its hit areas are where fingers go, its errors appear
-where the user is looking. That is the whole content of this skill: the
-accumulated, checkable defaults that let an interface get out of the way.
-
-Generic is the opposite failure, reaching for the same warm-cream-and-terracotta
-palette regardless of subject, the same three-column card grid, because nothing
-was decided (`default-tells`). Ordinary is decided; it just doesn't announce
-itself. Where an interface should be distinctive, that judgement lives in
-`frontend-design` and `design-engineering`, not here. This skill makes sure the
-thousand small things underneath are right, so the one distinctive thing has
-somewhere to stand.
+**Ordinary is the goal, and it is not the same as generic.** Ordinary is
+unremarkable *in use*: it behaves the way people already expect (`jakobs-law`)
+and matches the system the project already has (`match-the-project`). Generic is
+the same warm-cream palette and three-column card grid whatever the subject,
+because nothing was decided (`default-tells`). Ordinary is decided; it just does
+not announce itself. Where an interface should be distinctive, that judgement
+lives in `frontend-design` and `design-engineering`, not here.
 
 ## Step 0: read the project's system first
 
@@ -121,60 +114,34 @@ Load only what the task touches.
 | Hierarchy, emphasis, focal points, charts, radius tone | `references/composition.md` |
 | Choice counts, memory load, attention, optical centre | `references/ux-laws.md` |
 | Whether a UI reads as agent-built, with greppable cues | `references/ai-tells.md` |
-| Print, packaging, logo, photography (**outside the UI focus**) | `references/beyond-screen.md` |
 | Finding a rule by name | `RULE_INDEX.md` |
 
-## Building a screen
+## Workflows
 
-1. **Run `project-system.py`.** Adopt what exists before adding anything.
-2. Read the non-negotiables. They constrain the solution space before you draw.
-3. Load the reference files for the surfaces involved.
-4. **Take values from the project, then the reference, never from memory.** The
-   whole point is that these numbers are checked. Guessing "probably 1.4
-   line-height" defeats it.
-5. Work greyscale first. If hierarchy fails without color, color will not fix it
-   (`greyscale`). Then apply the 60-30-10 split.
-6. **Enumerate the non-happy states before writing markup** (`state-ledger`) and
-   build the hardest one first. A layout that survives its worst state survives
-   its best; the reverse is not true.
-7. Verify contrast with `scripts/contrast.py` before claiming a pair passes.
+Both of these live in their own sub-skill rather than here, so running one costs
+the workflow and not this file.
 
-## Auditing a screen, component, CSS, or screenshot
+| | |
+|---|---|
+| Building new UI | `/ordinary-interfaces:new-screen` |
+| Auditing existing UI | `/ordinary-interfaces:review` |
 
-Run `project-system.py` first, then produce a checklist ordered
-`critical → high → medium → low`. For each finding: rule id, what is wrong, the
-concrete fix, the number.
-
-```
-CRITICAL  wcag-contrast      #777777 label on #fff is 4.48:1, fails AA (needs 4.5:1)
-                             → #767676 or darker; separate token for text vs border
-HIGH      concentric-radius  Card is rounded-xl with p-2, inner is rounded-xl
-                             → outer 24px = inner 16px + 8px padding
-HIGH      line-length        Article body runs 108 CPL at 1440px
-                             → max-width: 65ch on the container
-MEDIUM    padding-gap-ratio  Card padding 16px equals the 16px grid gutter
-                             → 24px padding (1.5× heuristic)
-```
-
-Rules for the audit:
-
-- **Do not invent findings to fill the list.** An empty CRITICAL section is a result, and saying so plainly beats padding.
-- **Do not score the design out of 10.** There is no evidence base for that number and it obscures which fixes matter.
-- **Check the `When It Breaks` notes before flagging.** Full-bleed media, dense data tables, disabled controls and decorative elements have real exemptions, and flagging them is noise that trains people to ignore the whole audit.
-- **Say what you could not verify.** With only CSS or a description, separate verified findings from inferred ones. Replay motion at 10% speed before judging it; what feels off at 10% is what is subtly wrong at full speed.
-- **One row per root cause**, listing every location it appears in, rather than one row per occurrence.
+The short version of both: run `project-system.py`, let the seven gates
+constrain the solution space before drawing, load only the reference files the
+surfaces touch, take values from the project first and the reference second,
+never from memory, and measure contrast rather than estimating it.
 
 ## Scripts
 
+`project-system.py` is step 0 above. The other is `contrast.py`, which reports
+the ratio and pass/fail for normal text, large text and UI components, with
+`--fix` walking the foreground to the nearest passing value while keeping hue.
+Both are dependency-free and read-only.
+
 ```bash
-python3 .claude/skills/ordinary-interfaces/scripts/project-system.py .          # step 0, always
-python3 .claude/skills/ordinary-interfaces/scripts/contrast.py "#777" "#fff"    # ratio + AA/AAA
+python3 .claude/skills/ordinary-interfaces/scripts/contrast.py "#777" "#fff"
 python3 .claude/skills/ordinary-interfaces/scripts/contrast.py "#a5a8f0" "#fff" --fix
 ```
-
-`contrast.py` reports the ratio and pass/fail for normal text, large text and UI
-components; `--fix` walks the foreground to the nearest passing value, keeping
-hue. Both are dependency-free and read-only.
 
 ## Boundaries with the other design skills
 
@@ -193,6 +160,7 @@ rather than *what the value is*.
 | `animate` | Motion craft, interruptibility, how to build a specific transition. `motion.md` holds the durations and the easing bands only |
 | `scroll-animations` | Scroll-linked and scroll-triggered motion, `animation-timeline`, thresholds. This skill holds one position on it, in `ai-tells.md → load-animation-on-everything`: content above the fold does not animate in |
 | `stageshow` | Faux UI for marketing stills, demos and bento grids. Nothing here applies to an interface that is a picture of an interface |
+| `beyond-screen` | Print, packaging, logo and photography. These were an appendix here until 2.0.0. `viewing-distance` and `visual-angle-arcminutes` are the overlap: a screen read from further away than a desk takes its minimum type size from there |
 
 Two things to keep straight:
 

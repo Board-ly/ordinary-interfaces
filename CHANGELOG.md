@@ -9,6 +9,54 @@ set:
 - **minor**: rules or reference files added, scripts gain capabilities
 - **patch**: a number corrected, a citation fixed, wording clarified
 
+## [2.0.0] / 2026-11-04
+
+A structural release. No UI rule changed its value; the rules moved, the cues
+were repaired, and the entry points were re-sorted by what is cheap to load.
+
+### Removed
+
+- **`references/beyond-screen.md` and its 9 rule ids** leave this skill and
+  become the standalone `beyond-screen` skill: `viewing-distance`,
+  `visual-angle-arcminutes`, `aspect-ratios`, `logo-clearspace`,
+  `logo-variations`, `joint-cropping`, `dieline-bleed`, `cmyk-vs-pantone`,
+  `iso-216`. They were an appendix marked "outside the UI focus", nothing in
+  the UI rules referenced them, and a print question is not a UI question. The
+  ids are unchanged and the text is intact, so a reference to one still
+  resolves, in the other skill. **This is why the major version moves**: ids
+  left the index, which this changelog's own policy calls a breaking change.
+  The rule count goes 211 to 202.
+
+### Fixed
+
+- **The `ai-tells.md` detection cues missed utility-class codebases.** Four of
+  the cues matched only stylesheet syntax, so a Tailwind project returned no
+  findings, and no findings reads as a clean result rather than as an unrun
+  check. That is the worst failure available to a detection layer, and it hit
+  the stack the skill's own step 0 expects, since `project-system.py` reports
+  shadcn and Tailwind. Measured against one real codebase, the old hover cue
+  found 53 of 335 actual occurrences. Every cue now carries both notations,
+  `one-spacing-value` normalises `p-4`, `px-4` and `mt-4` to one step on the
+  scale before counting, `happy-path-only` searches from the repository root
+  instead of `src/components` and also catches the empty fragment, and
+  `border-instead-of-surface` and `centred-everything` gained the runnable
+  form they were described as having.
+
+### Changed
+
+- **`read-project`, `contrast` and `find-rule` lost `disable-model-invocation`.**
+  All six commands were user-only, so the agent's only path was the expensive
+  one: a single contrast check loaded `SKILL.md` plus a reference file when a
+  33-line command sat next to it. These three return a measurement rather than
+  an opinion. `accessibility`, `review` and `new-screen` stay locked, because a
+  review is something a person starts.
+- **`SKILL.md` is shorter by a sixth**, 200 lines to 168, 13,436 bytes to 11,232. The build workflow was
+  duplicated between it and `new-screen`, the audit format and audit rules
+  between it and `review`, with eleven lines character-identical. Each now
+  lives in its sub-skill, where it is loaded by the workflow that uses it. What
+  remains is what every task needs: step 0, the evidence grades, the seven
+  gates, and the routing table.
+
 ## [1.2.0] / 2026-11-02
 
 ### Added

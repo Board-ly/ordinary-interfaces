@@ -1,8 +1,21 @@
-# Beyond the Screen: Appendix
+---
+name: beyond-screen
+description: 'Evidence-graded rules for design that leaves the screen: viewing distance and visual angle, aspect ratios, logo clearspace and lockups, photography cropping, dieline bleed, CMYK versus Pantone, and the ISO 216 paper ratio. Use when preparing brand assets, print or packaging artwork, signage or large-format type, and whenever a value has to hold at a physical size rather than in CSS pixels.'
+---
 
-9 rules outside this skill's UI focus, kept for reference: brand assets,
-photography, physical scale and print production. Nothing in the UI reference
-files depends on them.
+# Beyond the Screen
+
+9 rules for the work that ends as ink, vinyl or a physical object, in the same
+five-part form and with the same evidence grades as `ordinary-interfaces`:
+`[spec]` is normative, `[measured]` comes from a study, `[convention]` is
+industry practice with no primary source.
+
+These were an appendix inside `ordinary-interfaces` and are now their own skill,
+because nothing in that skill's UI rules depends on them and a print question is
+not a UI question. The two meet in one place only: `viewing-distance` and
+`visual-angle-arcminutes` are the physical floor under every type size, so a
+screen read from further away than a desk, a TV, a kiosk, a wall display, takes
+its minimum size from here rather than from `typography.md`.
 
 ---
 

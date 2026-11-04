@@ -19,10 +19,28 @@ jobs:
       - name: Scripts compile, generated files current, contrast values hold
         run: python3 scripts/check.py
 
-      - name: Skill frontmatter is present and named
+      - name: Every skill has frontmatter, and its name matches its directory
         run: |
-          head -1 skills/ordinary-interfaces/SKILL.md | grep -qx -- '---'
-          grep -qx 'name: ordinary-interfaces' skills/ordinary-interfaces/SKILL.md
+          python3 - <<'PY'
+          import pathlib, re, sys
+          fail = []
+          for skill in sorted(pathlib.Path("skills").glob("*/SKILL.md")):
+              text = skill.read_text()
+              if not text.startswith("---\n"):
+                  fail.append(f"{skill}: no frontmatter")
+                  continue
+              front = text.split("---\n", 2)[1]
+              name = re.search(r"^name: (\S+)$", front, re.M)
+              if not name:
+                  fail.append(f"{skill}: no name")
+              elif name.group(1) != skill.parent.name:
+                  fail.append(f"{skill}: name is {name.group(1)}, directory is {skill.parent.name}")
+              if not re.search(r"^description: ", front, re.M):
+                  fail.append(f"{skill}: no description")
+          if fail:
+              sys.exit("\n".join(fail))
+          print(f"{len(list(pathlib.Path('skills').glob('*/SKILL.md')))} skills, all named and described")
+          PY
 
       - name: Manifest version matches the changelog
         run: |

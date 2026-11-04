@@ -1,6 +1,6 @@
 # Ordinary Interfaces
 
-211 UI rules with hard numbers, each graded by how well it is actually evidenced.
+202 UI rules with hard numbers, each graded by how well it is actually evidenced.
 An agent skill for the thousand small decisions underneath a screen: contrast,
 type, spacing, hit areas, component states, motion, surfaces, icons, empty and
 error states, and the words in the interface.
@@ -45,9 +45,15 @@ own:
 npx skills add Board-ly/ordinary-interfaces --skill accessibility
 ```
 
-None of them auto-load. They carry `disable-model-invocation: true` so they stay
-out of the way until you type them; the main skill is the one that loads itself
-when a task calls for it.
+The three workflows, `accessibility`, `review` and `new-screen`, carry
+`disable-model-invocation: true` and run only when you type them, because a
+review is something a person starts.
+
+The three utilities, `read-project`, `contrast` and `find-rule`, are also
+available to the agent on its own. They were locked until 2.0.0, which meant a
+single contrast check loaded the whole skill when a 33-line command next to it
+would have done. They produce a measurement rather than an opinion, so there is
+nothing to be gained by making you ask for them by hand.
 
 ## Why use it?
 
@@ -92,11 +98,16 @@ underneath it is right.
 - **[interaction](skills/ordinary-interfaces/references/interaction.md)**: 8 rules. Buttons, links, inputs, forms, nav, component states.
 - **[interface-craft](skills/ordinary-interfaces/references/interface-craft.md)**: 8 rules. Layering, borders, tokens: system versus a pile of components.
 - **[surfaces](skills/ordinary-interfaces/references/surfaces.md)**: 5 rules. Radius, depth, press feedback, theme switch.
-- **[beyond-screen](skills/ordinary-interfaces/references/beyond-screen.md)**: 9 rules kept as an appendix, outside the UI focus.
 - **[accessibility](skills/ordinary-interfaces/references/accessibility.md)**: the WCAG cross-index. Which success criterion each rule answers, and the audit order.
 
 Every id is listed one line each in
 [RULE_INDEX.md](skills/ordinary-interfaces/RULE_INDEX.md).
+
+One more skill ships here and is not part of that count:
+**[beyond-screen](skills/beyond-screen/SKILL.md)**, 9 rules on print, packaging,
+logo and photography. It was an appendix inside the main skill until 2.0.0.
+Nothing in the UI rules depends on it, and a print question is not a UI
+question, so it loads only when the work leaves the screen.
 
 ## Scripts
 

@@ -19,7 +19,6 @@ ORDER = [
     ("a11y-implementation.md", "Accessibility in Practice"),
     ("writing.md", "Interface Copy"), ("composition.md", "Hierarchy & Emphasis"),
     ("ux-laws.md", "Cognition & Behaviour"), ("ai-tells.md", "Agent Tells"),
-    ("beyond-screen.md", "Beyond the Screen (appendix)"),
 ]
 HEADING = re.compile(
     r"^## `([a-z0-9-]+)`\s*:\s*(.+?)\s*·\s*(?:\*\*)?(critical|high|medium|low)(?:\*\*)?",

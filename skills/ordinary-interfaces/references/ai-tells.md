@@ -10,6 +10,14 @@ and the rule elsewhere that fixes it. The cue is the part that is new here, and
 it is written to be runnable against a codebase rather than judged by eye, so a
 finding can be produced before anything has been looked at.
 
+**Two notations.** Each cue is given for both stylesheet declarations and
+utility classes, because a Tailwind project writes `p-4` and `hover:` where a
+CSS file writes `padding:` and `:hover`. Running the stylesheet form against a
+utility-class codebase returns nothing, and nothing reads as a clean result
+rather than as an unrun check, which is the worst failure a detection layer can
+have. `project-system.py` reports which notation the project uses. Take the
+matching line, and run both where a project mixes them.
+
 Run `scripts/project-system.py` first either way. Several cues are only
 meaningful against what the project already decided.
 
@@ -24,9 +32,17 @@ meaningful against what the project already decided.
 declarations, there is no rhythm** `[convention]`.
 
 ```bash
+# stylesheets
 grep -rhoE '(padding|margin|gap)[^:]*:[^;]+' src | grep -oE '[0-9]+(px|rem)' \
   | sort | uniq -c | sort -rn | head
+# utility classes
+grep -rhoE '\b[mp][trblxyse]?-[0-9]+(\.[0-9]+)?\b|\bgap(-[xy])?-[0-9]+(\.[0-9]+)?\b' src \
+  | sed -E 's/^[a-z]+-//' | sort | uniq -c | sort -rn | head
 ```
+
+The utility form strips the property prefix first, so `p-4`, `px-4` and `mt-4`
+count as the same step on the scale. That is the number the threshold is about:
+how many steps the project actually uses, not how many properties it sets.
 
 **Why it holds.** Grouping is carried by *differences* in space, see
 `spacing-layout.md → proximity` and `padding-gap-ratio`. A constant removes
@@ -80,6 +96,13 @@ component styles. **More borders than backgrounds means containment is being
 drawn rather than built**, and a solid mid-grey hex repeated across components
 confirms it.
 
+```bash
+# stylesheets
+grep -rhoE '^\s*border[^:]*:' src | wc -l ; grep -rhoE '^\s*background[^:]*:' src | wc -l
+# utility classes
+grep -rhoE '\bborder(-[trblxyse])?(-[0-9]+)?\b' src | wc -l ; grep -rhoE '\bbg-[a-z]' src | wc -l
+```
+
 **Why it holds.** A border separates two things at the same level. A surface
 says one sits on the other. Using the first for the second gives every boundary
 identical weight, so the screen becomes a set of equal rectangles and the eye
@@ -107,8 +130,16 @@ for depth.
 `motion.md → hover-gating`, usually appears with it.
 
 ```bash
-grep -rc ':hover' src | paste -sd+ - ; grep -rc ':active\|:focus-visible' src | paste -sd+ -
+# stylesheets
+grep -rhoE ':hover' src | wc -l
+grep -rhoE ':active|:focus-visible' src | wc -l
+# utility classes
+grep -rhoE '\bhover:' src | wc -l
+grep -rhoE '\bactive:|\bfocus-visible:' src | wc -l
 ```
+
+A ratio, not a count. Hover rules far outnumbering the other two is the tell,
+and a zero in the second line of either pair is the strong form of it.
 
 **Why it holds.** Hover is the one state a touch screen does not have and a
 keyboard does not have. Building only that state means the majority of
@@ -133,6 +164,13 @@ scale.
 **The cue.** `text-align: center` on containers rather than on short display
 text, every section built as a centred column, and **paragraphs over two lines
 centred**, which is the version that costs reading speed.
+
+```bash
+grep -rhoE 'text-align:\s*center|\btext-center\b' src | wc -l
+```
+
+A count alone does not decide this one. Open the files it names and check
+whether the centred element is a heading of a few words or a paragraph.
 
 **Why it holds.** A centred block gives the eye no stable left edge to return
 to, so every line starts at a new horizontal position, see
@@ -273,8 +311,13 @@ error**. The strongest single cue is an early `if (!data) return null`, which
 silently renders nothing for three different reasons.
 
 ```bash
-grep -rn 'return null' src/components | head
+grep -rn --include='*.tsx' --include='*.jsx' --include='*.vue' --include='*.svelte' \
+  -E 'return null|return <></>|v-if="!' . | grep -v node_modules | head -20
 ```
+
+Searching from the root rather than `src/components`, because a Next.js app
+keeps components in `app/`, a monorepo in `packages/*/`, and the convention is
+not worth guessing. The empty fragment is the same failure written differently.
 
 **Why it holds.** Every state that was not designed still ships, as whatever the
 code happens to do, which is usually a blank area with no explanation. It is

@@ -2,7 +2,6 @@
 name: contrast
 description: 'Measures a colour pair against WCAG 2.2 and reports the ratio with pass or fail for normal text, large text and UI components. With --fix it walks the foreground to the nearest passing value while keeping the hue. Use instead of estimating whether a pair passes.'
 argument-hint: '<foreground> <background> [--fix]'
-disable-model-invocation: true
 allowed-tools: Bash
 ---
 
