@@ -23,10 +23,10 @@ project, `~/.claude/skills/` for every project.
 
 ## Commands
 
-The skill loads itself when a task calls for it. These six run a specific part of
+The skill loads itself when a task calls for it. These seven run a specific part of
 it on demand, so you can reach for one step without pulling in the whole thing.
 
-All six are prefixed `/ordinary-interfaces:`, so the first is
+All seven are prefixed `/ordinary-interfaces:`, so the first is
 `/ordinary-interfaces:scan`.
 
 | | Does | Takes |
@@ -36,6 +36,7 @@ All six are prefixed `/ordinary-interfaces:`, so the first is
 | `review` | Full review, ordered critical to low, every finding with a rule id, a measured value and the fix | `[file, component, screenshot]` |
 | `build` | The workflow for building: adopt the system, let the floors constrain the space, greyscale first, hardest state first | `[what you are building]` |
 | `contrast` | Measures a colour pair against WCAG; `--fix` returns the nearest passing foreground | `<fg> <bg> [--fix]` |
+| `space` | Measures padding against the gap it contains, and reports the spacing scale actually in use | `[path]` or `[padding] [gap]` |
 | `rule` | One rule by id or topic: the value, its evidence grade, and where it stops applying | `[rule-id or topic]` |
 
 Outside Claude Code the bare names work too, `/review` and `/contrast`,
@@ -52,7 +53,7 @@ The three workflows, `a11y`, `review` and `build`, carry
 `disable-model-invocation: true` and run only when you type them, because a
 review is something a person starts.
 
-The three utilities, `scan`, `contrast` and `rule`, are also
+The four utilities, `scan`, `contrast`, `space` and `rule`, are also
 available to the agent on its own. They were locked until 2.0.0, which meant a
 single contrast check loaded the whole skill when a 33-line command next to it
 would have done. They produce a measurement rather than an opinion, so there is
@@ -122,13 +123,20 @@ python3 skills/ordinary-interfaces/scripts/project-system.py .
 
 # A colour pair, and the nearest passing value if it fails
 python3 skills/ordinary-interfaces/scripts/contrast.py "#777" "#fff" --fix
+
+# Padding against the gap it contains, across a codebase or as one pair
+python3 skills/ordinary-interfaces/scripts/spacing.py src
+python3 skills/ordinary-interfaces/scripts/spacing.py --pair 16 24
 ```
 
 `project-system.py` reports the token families, radius and spacing scales, colour
 notation, type sizes, breakpoints and motion curves a codebase already uses, plus
 whether `:focus-visible`, `prefers-reduced-motion` and `tabular-nums` appear at
 all. `contrast.py` gives the ratio and the AA/AAA verdicts, and `--fix` walks a
-foreground to the nearest passing value at constant hue.
+foreground to the nearest passing value at constant hue. `spacing.py` pairs a
+container's padding with the gap between its children wherever both sit on one
+element, on the axis the gap actually separates, and reports which spacing
+steps the project uses and which fall off the scale.
 
 [CONTRIBUTING.md](CONTRIBUTING.md) has the rule schema and the evidence bar for
 pull requests.

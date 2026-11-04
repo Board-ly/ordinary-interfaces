@@ -9,6 +9,40 @@ set:
 - **minor**: rules or reference files added, scripts gain capabilities
 - **patch**: a number corrected, a citation fixed, wording clarified
 
+## [2.2.0] / 2026-11-04
+
+### Added
+
+- **`space`, a seventh command, and `scripts/spacing.py` behind it.** It
+  measures `padding-gap-ratio` rather than asserting it. The scan pairs a
+  container's padding with the gap between its children wherever both sit on
+  one element, a class list holding `p-4` and `gap-6` or a CSS block holding
+  `padding` and `gap`, which is the only part of the rule that is decidable
+  without rendering. `--pair 16 24` checks a single pair the way `contrast.py`
+  checks a colour pair, down to the exit code. It also reports the spacing
+  scale in use and which values fall off the 4px step, which is
+  `one-spacing-value` from the other end: that cue catches one value used
+  everywhere, this catches forty values used once.
+- **Three assertions in `check.py` for it**, including the axis case. The
+  threshold values are quoted in `spacing-layout.md`, so a change that moved
+  them would silently make that rule wrong.
+
+### Fixed
+
+- **The first version of the scan reported 71% of one real codebase**, which is
+  not a finding. Two causes, both now closed. A plain `gap` on a flex row opens
+  space between columns and none between rows, so comparing it against the
+  vertical padding compared a number against nothing; the scan now resolves the
+  axis from the layout mode and skips, with a count, every element that
+  declares no `flex` or `grid` and therefore is not the container. And
+  variant-prefixed utilities were being folded in, so `gap-4 md:gap-12` was
+  read as a 48px gap at every width, producing a ratio true at no viewport. On
+  the same codebase the findings went from 190 of 267 to 72 of 126.
+- **Findings are ordered by how many px of padding are missing**, not by the
+  ratio. Sorted by ratio the list leads with badges and icon buttons, where the
+  ratio is worst and the shortfall is 6px, and buries the card that is 28px
+  short. That ordering is how a spacing audit gets ignored.
+
 ## [2.1.0] / 2026-11-04
 
 ### Changed

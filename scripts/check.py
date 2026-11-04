@@ -82,6 +82,40 @@ for fg, ratio, expect_pass in (("#777777", "4.48", False), ("#767676", "4.54", T
         verdict.strip() or out.stderr.strip(),
     )
 
+print("\nspacing.py")
+# padding-gap-ratio is >=1.5x, so 24px padding against a 16px gap is the exact
+# boundary and must pass, while the 16/24 inversion must fail. references/
+# spacing-layout.md quotes both ("a 16px gutter wants >=24px card padding"), so
+# a change that moved the threshold would make that rule wrong. The exit code
+# carries the verdict, as it does for contrast.py.
+for padding, gap, expect_pass in ((24, 16, True), (16, 24, False), (32, 16, True)):
+    out = subprocess.run(
+        [sys.executable, str(SKILL / "scripts" / "spacing.py"), "--pair", str(padding), str(gap)],
+        capture_output=True, text=True,
+    )
+    first = out.stdout.splitlines()[0] if out.stdout else out.stderr.strip()
+    ok = out.returncode == (0 if expect_pass else 1) and (
+        ("FAIL" not in first) if expect_pass else ("FAIL" in first)
+    )
+    report(ok, f"padding {padding}px against gap {gap}px "
+               f"{'meets' if expect_pass else 'misses'} 1.5x", first)
+
+# The axis rule: a gap on a flex row separates nothing vertically, so a tall
+# container with a wide gap must not be reported on the y axis. This is what
+# kept the check from flagging most of a real codebase.
+probe = ROOT / "scripts" / ".spacing-probe.tsx"
+probe.write_text('<div className="px-1 py-8 flex gap-6" />\n')
+try:
+    out = subprocess.run(
+        [sys.executable, str(SKILL / "scripts" / "spacing.py"), str(probe)],
+        capture_output=True, text=True,
+    )
+    report("x-axis" in out.stdout and "y-axis" not in out.stdout,
+           "a flex row's gap is checked on x only",
+           "1 pair on a known axis" if "y-axis" not in out.stdout else "y-axis reported")
+finally:
+    probe.unlink(missing_ok=True)
+
 print()
 if fails:
     print(f"{len(fails)} check(s) failed")

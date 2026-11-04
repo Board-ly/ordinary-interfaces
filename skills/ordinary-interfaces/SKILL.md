@@ -79,7 +79,7 @@ Details in `references/accessibility.md`.
 
 ## Commands
 
-Six sub-skills run one part of this on demand, without pulling in the whole
+Seven sub-skills run one part of this on demand, without pulling in the whole
 skill. Reach for one when the task is a single step rather than a whole review.
 
 | | Does |
@@ -89,10 +89,11 @@ skill. Reach for one when the task is a single step rather than a whole review.
 | `review` | The full audit, in the documented format |
 | `build` | The workflow for new UI |
 | `contrast` | A colour pair through `contrast.py`, with `--fix` |
+| `space` | Padding against the gap it contains, and the scale in use |
 | `rule` | One rule by id: value, grade, and where it stops applying |
 
-All six take the `/ordinary-interfaces:` prefix. `scan`, `contrast` and `rule`
-are available without being asked for; the three workflows are not.
+All seven take the `/ordinary-interfaces:` prefix. `scan`, `contrast`, `space`
+and `rule` are available without being asked for; the three workflows are not.
 
 ## Routing
 
@@ -102,7 +103,7 @@ Load only what the task touches.
 |---|---|
 | Palette, ramps, tokens, dark mode, contrast | `references/color.md` |
 | Type scale, line height, measure, wrapping, web font details | `references/typography.md` |
-| Padding, gaps, grids, breakpoints, RTL, translation growth | `references/spacing-layout.md` |
+| Padding, gaps, grids, breakpoints, RTL, translation growth | `references/spacing-layout.md`, measured by `space` |
 | Buttons, links, inputs, forms, nav, component states | `references/interaction.md` |
 | Tooltips, popovers, menus, dialogs, sheets, toasts, backdrops | `references/overlays.md` |
 | Radius, shadows, image outlines, press feedback, theme switch | `references/surfaces.md` |
@@ -136,14 +137,18 @@ never from memory, and measure contrast rather than estimating it.
 
 ## Scripts
 
-`project-system.py` is step 0 above. The other is `contrast.py`, which reports
-the ratio and pass/fail for normal text, large text and UI components, with
-`--fix` walking the foreground to the nearest passing value while keeping hue.
-Both are dependency-free and read-only.
+`project-system.py` is step 0 above. `contrast.py` reports the ratio and
+pass/fail for normal text, large text and UI components, with `--fix` walking
+the foreground to the nearest passing value while keeping hue. `spacing.py`
+pairs a container's padding with the gap between its children wherever both
+sit on one element, on the axis the gap actually separates. All three are
+dependency-free and read-only.
 
 ```bash
 python3 .claude/skills/ordinary-interfaces/scripts/contrast.py "#777" "#fff"
 python3 .claude/skills/ordinary-interfaces/scripts/contrast.py "#a5a8f0" "#fff" --fix
+python3 .claude/skills/ordinary-interfaces/scripts/spacing.py src
+python3 .claude/skills/ordinary-interfaces/scripts/spacing.py --pair 16 24
 ```
 
 ## Boundaries with the other design skills
