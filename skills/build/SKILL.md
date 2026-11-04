@@ -1,5 +1,5 @@
 ---
-name: new-screen
+name: build
 description: 'The ordinary-interfaces workflow for building a new screen or component: adopt the project system, let the seven gates constrain the solution space before drawing, work greyscale first, and enumerate the non-happy states before writing markup. Use when starting UI rather than reviewing it.'
 argument-hint: '[what you are building]'
 disable-model-invocation: true

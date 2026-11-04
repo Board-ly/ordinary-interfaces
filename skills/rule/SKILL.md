@@ -1,5 +1,5 @@
 ---
-name: find-rule
+name: rule
 description: 'Looks up a rule from ordinary-interfaces by id or topic and reports the value, its evidence grade, where it stops applying, and the reference file it lives in. Use to check a single number without loading the whole skill.'
 argument-hint: '[rule-id or topic]'
 allowed-tools: Read Glob Grep

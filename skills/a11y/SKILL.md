@@ -1,5 +1,5 @@
 ---
-name: accessibility
+name: a11y
 description: 'Checks only the seven non-negotiables from ordinary-interfaces: contrast, never colour alone, hit areas, text alternatives, visible focus, motion safety, and reflow. These are accessibility floors with legal weight, not the aesthetic conversation. Use as the ship gate before release.'
 argument-hint: '[file, component, or path]'
 disable-model-invocation: true

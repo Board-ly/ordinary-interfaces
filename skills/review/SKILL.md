@@ -18,7 +18,7 @@ Target: `$ARGUMENTS`. If empty, ask what to review rather than guessing.
    from the reference" only second. The first is nearly always the more useful
    sentence.
 2. **Check the seven gates.** They constrain everything else. See
-   `/ordinary-interfaces:accessibility`.
+   `/ordinary-interfaces:a11y`.
 3. **Run the cues in `references/ai-tells.md`** where the target is a codebase
    rather than a screenshot. They are counting tests over the styles, so they
    produce findings before anything has been read: one spacing value covering

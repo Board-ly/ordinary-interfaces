@@ -9,6 +9,24 @@ set:
 - **minor**: rules or reference files added, scripts gain capabilities
 - **patch**: a number corrected, a citation fixed, wording clarified
 
+## [2.1.0] / 2026-11-04
+
+### Changed
+
+- **Four commands have shorter names.** `read-project` is `scan`,
+  `accessibility` is `a11y`, `new-screen` is `build`, `find-rule` is `rule`.
+  `review` and `contrast` were already short enough. With the
+  `/ordinary-interfaces:` prefix the longest invocation went from 34 characters
+  to 29, and in the README's table the prefix is now stated once above instead
+  of repeated in every row, which is what actually made the column unreadable
+  on a narrow screen.
+- **The old names no longer work**, including
+  `npx skills add ... --skill accessibility`, which is now `--skill a11y`. By
+  the policy above this is a minor release, since that policy is written about
+  rule ids and no rule id moved. It is listed here as plainly as a breaking
+  change would be, because for anyone who typed the old names it behaves like
+  one.
+
 ## [2.0.0] / 2026-11-04
 
 A structural release. No UI rule changed its value; the rules moved, the cues

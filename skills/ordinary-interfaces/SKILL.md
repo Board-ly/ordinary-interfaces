@@ -82,14 +82,17 @@ Details in `references/accessibility.md`.
 Six sub-skills run one part of this on demand, without pulling in the whole
 skill. Reach for one when the task is a single step rather than a whole review.
 
-| Command | Does |
+| | Does |
 |---|---|
-| `/ordinary-interfaces:read-project` | Step 0 above, on its own |
-| `/ordinary-interfaces:accessibility` | The seven non-negotiables only, pass/fail/unverified |
-| `/ordinary-interfaces:review` | The full audit below, in the documented format |
-| `/ordinary-interfaces:new-screen` | The build workflow below |
-| `/ordinary-interfaces:contrast` | A colour pair through `contrast.py`, with `--fix` |
-| `/ordinary-interfaces:find-rule` | One rule by id: value, grade, and where it stops applying |
+| `scan` | Step 0 above, on its own |
+| `a11y` | The seven non-negotiables only, pass/fail/unverified |
+| `review` | The full audit, in the documented format |
+| `build` | The workflow for new UI |
+| `contrast` | A colour pair through `contrast.py`, with `--fix` |
+| `rule` | One rule by id: value, grade, and where it stops applying |
+
+All six take the `/ordinary-interfaces:` prefix. `scan`, `contrast` and `rule`
+are available without being asked for; the three workflows are not.
 
 ## Routing
 
@@ -123,7 +126,7 @@ the workflow and not this file.
 
 | | |
 |---|---|
-| Building new UI | `/ordinary-interfaces:new-screen` |
+| Building new UI | `/ordinary-interfaces:build` |
 | Auditing existing UI | `/ordinary-interfaces:review` |
 
 The short version of both: run `project-system.py`, let the seven gates

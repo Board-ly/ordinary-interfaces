@@ -1,5 +1,5 @@
 ---
-name: read-project
+name: scan
 description: 'Step 0 of ordinary-interfaces. Reports what this codebase already decided about tokens, radius and spacing scales, colour notation, type sizes, breakpoints and motion, so a review adopts the project system instead of overwriting it. Run before quoting any reference value.'
 argument-hint: '[path, default .]'
 allowed-tools: Bash Read Glob Grep

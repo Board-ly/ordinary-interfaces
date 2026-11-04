@@ -26,14 +26,17 @@ project, `~/.claude/skills/` for every project.
 The skill loads itself when a task calls for it. These six run a specific part of
 it on demand, so you can reach for one step without pulling in the whole thing.
 
-| Command | Does | Takes |
+All six are prefixed `/ordinary-interfaces:`, so the first is
+`/ordinary-interfaces:scan`.
+
+| | Does | Takes |
 |---|---|---|
-| `/ordinary-interfaces:read-project` | Reads what your codebase already decided about tokens, scales, colour notation and motion, so a review adopts your system instead of overwriting it | `[path]` |
-| `/ordinary-interfaces:accessibility` | The seven floors only: contrast, colour, hit areas, alt text, focus, motion, reflow. Pass, fail or unverified, and one verdict | `[file or path]` |
-| `/ordinary-interfaces:review` | Full review, ordered critical to low, every finding with a rule id, a measured value and the fix | `[file, component, screenshot]` |
-| `/ordinary-interfaces:new-screen` | The workflow for building: adopt the system, let the floors constrain the space, greyscale first, hardest state first | `[what you are building]` |
-| `/ordinary-interfaces:contrast` | Measures a colour pair against WCAG; `--fix` returns the nearest passing foreground | `<fg> <bg> [--fix]` |
-| `/ordinary-interfaces:find-rule` | One rule by id or topic: the value, its evidence grade, and where it stops applying | `[rule-id or topic]` |
+| `scan` | Reads what your codebase already decided about tokens, scales, colour notation and motion, so a review adopts your system instead of overwriting it | `[path]` |
+| `a11y` | The seven floors only: contrast, colour, hit areas, alt text, focus, motion, reflow. Pass, fail or unverified, and one verdict | `[file or path]` |
+| `review` | Full review, ordered critical to low, every finding with a rule id, a measured value and the fix | `[file, component, screenshot]` |
+| `build` | The workflow for building: adopt the system, let the floors constrain the space, greyscale first, hardest state first | `[what you are building]` |
+| `contrast` | Measures a colour pair against WCAG; `--fix` returns the nearest passing foreground | `<fg> <bg> [--fix]` |
+| `rule` | One rule by id or topic: the value, its evidence grade, and where it stops applying | `[rule-id or topic]` |
 
 Outside Claude Code the bare names work too, `/review` and `/contrast`,
 unless something else already owns them.
@@ -42,14 +45,14 @@ Each is its own skill under `skills/`, so `npx skills add` can install one on it
 own:
 
 ```bash
-npx skills add Board-ly/ordinary-interfaces --skill accessibility
+npx skills add Board-ly/ordinary-interfaces --skill a11y
 ```
 
-The three workflows, `accessibility`, `review` and `new-screen`, carry
+The three workflows, `a11y`, `review` and `build`, carry
 `disable-model-invocation: true` and run only when you type them, because a
 review is something a person starts.
 
-The three utilities, `read-project`, `contrast` and `find-rule`, are also
+The three utilities, `scan`, `contrast` and `rule`, are also
 available to the agent on its own. They were locked until 2.0.0, which meant a
 single contrast check loaded the whole skill when a 33-line command next to it
 would have done. They produce a measurement rather than an opinion, so there is
